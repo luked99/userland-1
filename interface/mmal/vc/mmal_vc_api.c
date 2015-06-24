@@ -392,7 +392,6 @@ static MMAL_STATUS_T mmal_vc_port_flush(MMAL_PORT_T *port)
 {
    static MMAL_PORT_FLUSH_CHECK_T is_port_flush_compatible = PORT_FLUSH_NOT_INITIALIZED;
    uint32_t major = 0, minor = 0, minimum = 0;
-   MMAL_STATUS_T status;
    /* Buffers sent to videocore, if not zero-copy, use vchiq bulk transfers to copy the data.
       A flush could be sent while one of these buffers is being copied. If the normal flushing method
       is used, the flush can arrive before the buffer, which causes confusion when a pre-flush buffer
@@ -408,7 +407,7 @@ static MMAL_STATUS_T mmal_vc_port_flush(MMAL_PORT_T *port)
 
    if (is_port_flush_compatible == PORT_FLUSH_NOT_INITIALIZED)
    {
-      status = mmal_vc_get_version(&major, &minor, &minimum);
+      mmal_vc_get_version(&major, &minor, &minimum);
       if (major >= 15)
       {
          is_port_flush_compatible = PORT_FLUSH_COMPATIBLE;
