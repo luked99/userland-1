@@ -33,13 +33,10 @@ set (SOURCES
    ../generic/vcos_generic_blockpool.c
 )
 
-if (VCOS_PTHREADS_BUILD_SHARED)
-   add_library (vcos SHARED ${SOURCES})
-   target_link_libraries (vcos pthread dl rt)
-else ()
-   add_library (vcos ${SOURCES})
-   target_link_libraries (vcos pthread rt)
-endif ()
+add_library (vcos SHARED ${SOURCES})
+target_link_libraries (vcos pthread dl rt)
+add_library (vcos_static ${SOURCES})
+target_link_libraries (vcos_static pthread rt)
 
 
 #install(FILES ${HEADERS} DESTINATION include)
