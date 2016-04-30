@@ -162,13 +162,13 @@ typedef unsigned long long uint64_t;
 #ifdef _MSC_VER
    #define UNUSED(X) X
 #else
-   #define UNUSED(X)
+   #define UNUSED(X) (void)(X)
 #endif
 
 #ifdef NDEBUG
    #define UNUSED_NDEBUG(X) UNUSED(X)
 #else
-   #define UNUSED_NDEBUG(X)
+   #define UNUSED_NDEBUG(X) UNUSED(X)
 #endif
 
 #define KHRN_NO_SEMAPHORE 0xffffffff
